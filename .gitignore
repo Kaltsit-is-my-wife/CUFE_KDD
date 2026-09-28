@@ -43,6 +43,12 @@ ENV/
 !.env.example
 *.pem
 *.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.token
+*.secret
 secrets/
 credentials/
 
@@ -67,8 +73,10 @@ processed-data/
 *.pkl
 *.pickle
 *.db
+*.db-*
 *.sqlite
 *.sqlite3
+*.sqlite-*
 *.npy
 *.npz
 *.arrow
@@ -122,5 +130,3 @@ Thumbs.db
 !*.jpg
 !*.jpeg
 !*.svg
-
-#other
