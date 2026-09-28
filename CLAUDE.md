@@ -14,6 +14,21 @@
 - `PROGRESS.md`：所有 idea 和实验的统一进度表。
 - `000-template`：模板目录，不是实际 idea 或实验。
 
+## Git 分支与修改流程
+
+- 任何文件修改、删除、移动或新增之前，必须先从最新的 `main` 创建并切换到独立分支；只允许先查看文件、检查状态和创建分支。
+- 一个分支只服务一个 idea、实验、修复或文档主题，完成后通过 Pull Request 合并，禁止直接修改或 push `main`。
+- 分支名称使用小写字母、数字和短横线，格式为 `<type>/<scope>` 或 `<type>/<member>/<scope>`；`scope` 应简短描述实际工作内容。
+- 推荐的 `<type>`：
+	- `idea/`：新增或调整 Idea，例如 `idea/001-short-name`。
+	- `experiment/`：新增或调整实验，例如 `experiment/001-short-name`。
+	- `docs/`：修改文档或项目规范，例如 `docs/update-claude-rules`。
+	- `sandbox/`：个人沙盒工作，例如 `sandbox/member-01-short-name`。
+	- `fix/`：修复已有问题，例如 `fix/001-metadata`。
+	- `archive/`：归档 Idea 或实验，例如 `archive/002-negative-result`。
+- 成员专属工作应在名称中保留成员编号，例如 `docs/member-01-update-claude-rules`。
+- 本次由 `@member-01` 进行规则修改，示范分支为 `docs/member-01-update-claude-rules`。
+
 ## 不可违反的规则
 
 1. 先写 idea，再落地实验；idea 与实验必须编号一一对应。
@@ -21,7 +36,7 @@
 3. 废弃内容标记为 `archived` 并保留历史，不删除。
 4. 原始数据集、模型权重、大日志、凭据和受限数据禁止提交 Git。
 5. 只提交预处理脚本、指标摘要、Markdown 文档、脱敏小样例和可审阅图片。
-6. 变更必须通过 PR，至少一名成员 review，禁止直接 push `main`。
+6. 任何修改必须先创建独立分支，再通过 PR 合并；至少一名成员 review，禁止直接 push `main`。
 7. 每个 idea 和实验都必须明确记录【核心假设】、基线、数据集、指标和限制。
 
 ## 工作偏好
