@@ -130,3 +130,17 @@ Thumbs.db
 !*.jpg
 !*.jpeg
 !*.svg
+
+# 相关论文：已发表论文的 PDF，含版权且体积大，不入库
+# 需要记录时请提交书目信息（标题/作者/年份/链接）而非 PDF 本体
+相关论文/
+
+# sandbox 下的个人草稿不入库（保留目录结构与说明文件）
+# 依据 CLAUDE.md：sandbox 是"个人临时草稿和快速验证，不保证复现"，成熟内容应迁移到 ideas/ 或 experiments/
+sandbox/*
+!sandbox/README.md
+!sandbox/member-*/
+
+# 本地临时文件
+_paper_dump.txt
+*_dump.txt
