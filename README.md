@@ -57,6 +57,31 @@
 - 编号固定三位、从 `001` 递增；`000-template` 仅用于复制，不作为真实项目。
 - 文件名优先使用小写短横线；Markdown 文档可保留约定名称 `README.md`、`PROGRESS.md` 等。
 
+### 成员编号与分支命名
+
+成员编号统一使用三位数字，用于个人分支命名：
+
+| 成员 | 编号 |
+|---|---|
+| BoYuan Qi | `001` |
+| Yucheng Liu | `002` |
+| DingYu | `003` |
+| XinYue Liu | `004` |
+| ZHeJohn | `005` |
+
+分支名称遵循 `CLAUDE.md` 中的规则:
+- 任何文件修改、删除、移动或新增之前，必须先从最新的 `main` 创建并切换到独立分支；只允许先查看文件、检查状态和创建分支。
+- 一个分支只服务一个 idea、实验、修复或文档主题，完成后通过 Pull Request 合并，禁止直接修改或 push `main`。
+- 分支名称使用小写字母、数字和短横线，格式为 `<type>/<scope>` 或 `<type>/<member>/<scope>`；`scope` 应简短描述实际工作内容。
+- 推荐的 `<type>`：
+	- `idea/`：新增或调整 Idea，例如 `idea/001-short-name`。
+	- `experiment/`：新增或调整实验，例如 `experiment/001-short-name`。
+	- `docs/`：修改文档或项目规范，例如 `docs/update-claude-rules`。
+	- `sandbox/`：个人沙盒工作，例如 `sandbox/member-01-short-name`。
+	- `fix/`：修复已有问题，例如 `fix/001-metadata`。
+	- `archive/`：归档 Idea 或实验，例如 `archive/002-negative-result`。
+- 成员专属工作应在名称中保留成员编号，例如 `docs/member-01-update-claude-rules`。
+
 ## 数据、模型与结果
 
 禁止提交原始数据集、受限数据、模型权重、大日志、密钥和个人隐私信息。仓库中只保留：
