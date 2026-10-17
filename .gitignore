@@ -144,3 +144,7 @@ sandbox/*
 # 本地临时文件
 _paper_dump.txt
 *_dump.txt
+
+# 外部代码仓库仅在本地用于阅读和实验，不作为本仓库源码提交
+external/*
+!external/README.md
