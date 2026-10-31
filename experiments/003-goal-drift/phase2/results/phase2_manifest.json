@@ -1,0 +1,124 @@
+{
+  "seeds": {
+    "data": 20261025,
+    "bootstrap": 20261026
+  },
+  "python": "3.14.0",
+  "pandas": "3.0.3",
+  "trajectory_counts": {
+    "dev:abrupt_drift": 8,
+    "dev:gradual_drift": 8,
+    "dev:indirect_drift": 8,
+    "dev:similar_goal_drift": 8,
+    "dev:stable": 8,
+    "dev:temporary_shift": 8,
+    "dev:topic_switch": 8,
+    "test:abrupt_drift": 16,
+    "test:gradual_drift": 16,
+    "test:indirect_drift": 16,
+    "test:similar_goal_drift": 16,
+    "test:stable": 16,
+    "test:temporary_shift": 16,
+    "test:topic_switch": 16
+  },
+  "detector_params": {
+    "baseline_a_topic": {},
+    "baseline_b_persistence": {
+      "window": 4,
+      "persistence": 2
+    },
+    "method_c_original": {
+      "threshold": 0.3,
+      "persistence": 1
+    },
+    "method_d_evidence": {
+      "alpha": 0.8,
+      "margin": 0.25,
+      "confirmations": 3,
+      "gap": 1
+    }
+  },
+  "memory_params": {
+    "no_update": {},
+    "time_decay": {
+      "decay_rate": 0.14
+    },
+    "drift_aware_original": {},
+    "drift_aware_improved": {
+      "lookback": 3,
+      "confirm_margin": 0.55
+    }
+  },
+  "bootstrap_iterations": 2000,
+  "phase1_snapshot_sha256": "1616cd18c49c5d02c20cbacca7852748230d48f6488c21174aeb6ead8e7b957e",
+  "files": {
+    "phase2_audit.md": {
+      "bytes": 3254,
+      "sha256": "4c85cbb5dfc020b38d389dcb3ecdcaca1c54d15be02c19d55521fd1403c1c63b"
+    },
+    "phase2_detection_comparison.png": {
+      "bytes": 59431,
+      "sha256": "24a534a9b2baeead974c291bd48258f7dee82155a8a09f530cdff5f7a2f5156e"
+    },
+    "phase2_detection_dev_tuning.csv": {
+      "bytes": 21455,
+      "sha256": "85a5a2505297a08f2b43329e5635de04c9e84d63cb0afff240fb107c9aea98fe"
+    },
+    "phase2_detection_metrics.csv": {
+      "bytes": 3628,
+      "sha256": "e54ab926b3bf32e0433282acb401a73de7f301f12bfe65c5946692b1b853b6bc"
+    },
+    "phase2_failure_cases.csv": {
+      "bytes": 54736,
+      "sha256": "64a9ba9b1207852df6b24a3db3a4438bc02e05c1f9ecab25722aeb85b14e6188"
+    },
+    "phase2_memory_details.csv": {
+      "bytes": 1116619,
+      "sha256": "a3a0fedd9f4357128385ad21e2daa5fcd7ec324356e8e2185fa8865f0de3a307"
+    },
+    "phase2_memory_dev_tuning.csv": {
+      "bytes": 2607,
+      "sha256": "d2346d609813c51b8d0941577a4687aecb92139e92ca5e4004d2ef2f18b14acd"
+    },
+    "phase2_memory_metrics.csv": {
+      "bytes": 4474,
+      "sha256": "a927157c4be58dd5ad7da201c89cb3299aec629c9bf9722c65b13d47015f7b92"
+    },
+    "phase2_memory_tradeoff.png": {
+      "bytes": 55795,
+      "sha256": "f1894ba2364058f72682e1e03496acd3bd8861bb50f2bb846aa56ff76893dca3"
+    },
+    "phase2_predictions.csv": {
+      "bytes": 47079,
+      "sha256": "cce8854c6b61f1a528ad7cb68f131f778ff1f17cf3025f6932348a325e9314bc"
+    },
+    "phase2_summary.md": {
+      "bytes": 4949,
+      "sha256": "bde93ebc9844b3b8262f250a8a1a7ecb60f6a6fa54807dd37a736f199dd9f2a3"
+    },
+    "phase2_task_comparison.png": {
+      "bytes": 56711,
+      "sha256": "72b81c2ce129fb1ab67b8597ec02bce76b1980d1fe96859392f9c88ff5a06408"
+    },
+    "phase2_task_details.csv": {
+      "bytes": 155289,
+      "sha256": "07e9ee546a173a106e08b7fe18d72b73f8abdf5f834572a5a730b257fa46af45"
+    },
+    "phase2_task_metrics.csv": {
+      "bytes": 1659,
+      "sha256": "75cd1b60efff80f920c696117fb9aa82b9676f55a44779eca7183b72306b59d1"
+    },
+    "phase2_task_pairwise.csv": {
+      "bytes": 1549,
+      "sha256": "416ba3d97b642204b1c6369d1604289d814f9dc1ab4773b94dc3288724c8596c"
+    },
+    "phase2_trajectory_data.csv": {
+      "bytes": 435687,
+      "sha256": "5f9e86ceb3622f2e460bf286b7febd3d359e4e59d2456c3c3c8d51431985293d"
+    }
+  },
+  "determinism_check": {
+    "status": "PASS",
+    "compared_files": 16
+  }
+}

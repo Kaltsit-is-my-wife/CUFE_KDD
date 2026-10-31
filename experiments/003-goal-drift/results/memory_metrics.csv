@@ -1,0 +1,4 @@
+﻿strategy,obsolete_interference_rate,valid_memory_retention_rate,obsolete_precision,obsolete_recall,obsolete_f1,incorrect_downweight_rate,memory_update_count
+no_update,0.275,1.0,0.0,0.0,0.0,0.0,0.0
+time_decay,0.16854061032051887,0.5507451570926897,0.3055555555555556,1.0,0.46808510638297873,0.5102040816326531,18.0
+drift_aware,0.17174409748667172,1.0,1.0,0.5151515151515151,0.6799999999999999,0.0,2.8333333333333335

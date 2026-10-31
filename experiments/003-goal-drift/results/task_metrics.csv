@@ -1,0 +1,4 @@
+﻿strategy,task_success_rate,old_goal_conflict_rate,constraint_satisfaction_rate,background_utilization_rate
+no_update,0.6666666666666666,0.3333333333333333,0.6666666666666666,1.0
+time_decay,1.0,0.0,1.0,1.0
+drift_aware,0.7222222222222222,0.2777777777777778,0.8333333333333334,1.0
