@@ -42,6 +42,9 @@ MemoryCD 20 用户
 | `paper_reading_log.md` | 完成 | 5/5 已核对原文；CALMRec / CAPTURE / AcCoRD / MemoryCD / ULSPB 的摘要与差异已补齐 |
 | `related_work.md` | 完成 | 五篇论文对照、研究脉络、正面比较、baseline 计划、组件映射、novelty 威胁与 related work 草稿 |
 | `week1_handoff.md` | 完成 | 给 P2–P5 的交接说明：任务、DoD、接口、demo、Gate 1、阻塞与立即行动 |
+| sandbox demo（P1 临时） | 跑通 | 20 synthetic users × 3 sessions；naive CMR=1.0 / provenance CMR=0.0 / IDR=0.0 / SFB 0.112→0.009；仅链路验证，不是正式 D5 demo |
+
+> Sandbox demo 的代码与结果在 `sandbox/member-01/demo/`；正式 D5 demo 仍需 P2–P5 的真实产物。
 
 ---
 
