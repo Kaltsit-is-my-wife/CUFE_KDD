@@ -82,11 +82,11 @@
 - **主要指标**：CMR、SFB、IDR、Quality（任务成功率 / NDCG / 多样性）；必须同时报告 Coverage。
 - **次要指标**：AL、OUR、CR、Faithfulness、Diversity。
 - **消融或对照**：去掉 provenance / propensity / exploration / negative controls / persistence；prompt-only；不同 `ε`、`η`、`p_shock`、memory budget、LLM。
-- **预期资源与时间**：Week 1 最小闭环不依赖真实 LLM API；Week 2 Gate 1 使用 MemoryCD 20 用户 × 5 sessions × 3 seeds。
+- **预期资源与时间**：Week 1 最小闭环不依赖真实 LLM API；Week 2 Gate 1 使用 MemoryCD 20 用户 × 5 sessions × 5 seeds。
 - **成功标准**：Gate 1 中 naive CMR ≥ 20%、provenance 相对下降 ≥ 30%、Quality 下降 ≤ 5%。
 - **停止条件**：CMR 在所有 domain < 10%，或 provenance prompt 单独解决 80% 以上问题 → 收缩为诊断工具或转向。
 
-详细指标口径见 [`docs/metrics.md`](docs/metrics.md)，schema review 与决策见 [`docs/schema_review.md`](docs/schema_review.md)、[`docs/decisions.md`](docs/decisions.md)，Week 1 计划见 [`experiment.md`](experiment.md)。
+详细指标口径见 [`docs/metrics.md`](docs/metrics.md)，schema review 与决策见 [`docs/schema_review.md`](docs/schema_review.md)、[`docs/decisions.md`](docs/decisions.md)，pilot 协议与 Gate 1 配置见 [`docs/pilot_protocol.md`](docs/pilot_protocol.md)、[`docs/gate1_config.yaml`](docs/gate1_config.yaml)，Week 1 计划见 [`experiment.md`](experiment.md)。
 
 ## 9. 风险与限制
 
@@ -107,6 +107,7 @@
 | 2026-11-12 | @member-01 | 本周指标先实现 CMR / SFB；AL / OUR / CR 允许占位 | 本周目标是证明“可测”，不是“显著” | P5 实现 `metrics.py` |
 | 2026-11-12 | @member-01 | 建议三个 schema 周四 17:00 冻结 v1；字段变更走 RFC（待 kickoff 确认） | 防止 D2 后各自实现一套字段 | D3 schema review |
 | 2026-11-12 | @member-01 | D3 schema review v0 完成；v1 变更清单见 `docs/decisions.md` 的 `D3-001`，D4 17:00 冻结（待 P2–P5 确认） | CMR/IDR 需要 `memory_type`；Coverage 需要 `WriteDecision`；SFB 需要 exposure | P2–P4 按清单修改 schema |
+| 2026-11-12 | @member-01 | D4 pilot 协议与 Gate 1 配置 v0 完成：20 用户 × 5 sessions；3 memory × 2 writer × 5 seeds；主指标 CMR；阈值预注册 | 需要固定 Gate 1 口径，避免临时拍脑袋 | P2–P5 按协议实现；schema v1 待冻结 |
 
 ## 11. 结论与后续
 

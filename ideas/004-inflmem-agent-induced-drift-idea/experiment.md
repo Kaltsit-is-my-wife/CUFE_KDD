@@ -56,7 +56,7 @@
 
 - **去掉关键模块**：provenance、propensity、randomized exploration、negative controls、persistence test。
 - **替换数据切分**：不同用户子集、不同 domain、不同 seed。
-- **不同随机种子**：Week 2 Gate 1 至少 3 seeds。
+- **不同随机种子**：Week 2 Gate 1 使用 5 seeds。
 - **子群体/时间段/难例分析**：按 domain、用户历史长度、exposure 强度拆分。
 - **失败案例分析**：naive 写对但 provenance 写错、provenance 过度保守、明确纠正后未降权。
 - **参数敏感性**：`η`（内化强度）、`p_shock`（外生冲击）、`ε`（探索率）、memory budget、session 长度。
@@ -65,7 +65,7 @@
 
 - **Python/框架版本**：待定；Week 1 不依赖真实 LLM API，Pandas + 标准库即可跑最小链路。
 - **运行命令**：`python scripts/run_pilot.py --config configs/pilot.yaml`（计划）。
-- **随机种子**：Week 1 固定 `seed=0`；Gate 1 使用 3 seeds。
+- **随机种子**：Week 1 固定 `seed=0`；Gate 1 使用 5 seeds。
 - **预计硬件与时间**：CPU 即可；MemoryCD 下载与 Mem0 适配是主要时间风险。
 - **外部数据/权重位置及校验信息**：MemoryCD 放外部存储；记录 HF revision、checksum、下载脚本 commit。
 - **允许提交的结果摘要/图片**：`metrics.json`、汇总 CSV、小型 PNG、脱敏 fixture；不提交原始数据和大日志。
@@ -78,12 +78,12 @@
 | D1 kickoff / 论文阅读 | P1 | 2026-11-12 | `kickoff.md` 可评审 | 完成 |
 | D2 问题定义 / DAG | P1 | 2026-11-12 | `problem.md`、`causal_dag.md` 可评审 | 完成 |
 | D3 指标口径 / schema review | P1 | 2026-11-12 | `metrics.md` v0；`schema_review.md`；`decisions.md` D3-001 | 完成（v0 review） |
-| D4 pilot 协议 / Gate 1 配置 | P1 | 2026-11-14 | `pilot_protocol.md`；20 用户 × 5 sessions × 3 seeds | not-started |
+| D4 pilot 协议 / Gate 1 配置 | P1 | 2026-11-12 | `pilot_protocol.md`；`gate1_config.yaml`；schema v1 冻结 | 部分完成（协议/配置 v0；schema v1 待 P2–P4） |
 | D5 Demo / 复盘 | P1 | 2026-11-15 | demo 通过；`week1_review.md` | not-started |
 | Week 2 Gate 1 | P1 + P5 | 第 2 周末 | naive CMR ≥ 20%；provenance 相对下降 ≥ 30% | not-started |
 
 ## 9. 当前状态
 
-- 已完成：问题定义、因果 DAG、指标口径 v0、schema review v0、`decisions.md` D3-001、Week 1 kickoff 草案。
-- 尚未完成：schema v1 冻结、pilot 协议、`metrics.py`、20 用户子集、simulator、memory adapter、demo。
+- 已完成：问题定义、因果 DAG、指标口径 v0、schema review v0、`decisions.md` D3-001、pilot 协议与 Gate 1 配置 v0、Week 1 kickoff 草案。
+- 尚未完成：schema v1 冻结、`metrics.py`、20 用户子集、simulator、memory adapter、demo。
 - 当前结论：尚无实验结论；本文件中的数值均为待验证假设。

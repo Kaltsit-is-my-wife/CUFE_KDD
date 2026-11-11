@@ -81,7 +81,68 @@
 | 按本决策修改三个 schema | P2 / P3 / P4 | D4 17:00 | schema v1 草案 |
 | 更新 `metrics.md` 的 schema 依赖（含 `WriteDecision`） | P1 / P5 | D3 14:00 | `metrics.md` v1 |
 | 实现 user scope 隔离测试 | P3 | D5 | 测试用例 |
-| schema v1 冻结并签字 | P1 | D4 17:00 | 本文件追加 `D4-001` |
+| schema v1 冻结并签字 | P1 | D4 17:00 | 本文件追加 `D4-002` |
+
+### 签字
+
+| 角色 | 姓名/编号 | 结论 | 日期 |
+|---|---|---|---|
+| P1 Lead / 因果与评测 | @member-01 | 提出并主持 | 2026-11-12 |
+| P2 Sim / Data | 待定 | 待确认 | — |
+| P3 Memory | 待定 | 待确认 | — |
+| P4 Method | 待定 | 待确认 | — |
+| P5 Eval / Analysis | 待定 | 待确认 | — |
+
+---
+
+## D4-001：Pilot 协议与 Gate 1 配置 v0
+
+| 字段 | 内容 |
+|---|---|
+| 决策编号 | `D4-001` |
+| 日期 | 2026-11-12 |
+| 主持人 | @member-01（P1） |
+| 参与人 | P1–P5（待确认） |
+| 状态 | `proposed`（待 P2–P5 确认；不阻塞 Week 1 实现） |
+| 影响范围 | Week 1 pilot、Week 2 Gate 1、P2–P5 的实现与运行 |
+| 关联文档 | [pilot_protocol.md](pilot_protocol.md)、[gate1_config.yaml](gate1_config.yaml)、[metrics.md](metrics.md) |
+
+### 结论
+
+1. 采用 [pilot_protocol.md](pilot_protocol.md) v0 与 [gate1_config.yaml](gate1_config.yaml) v0。
+2. Gate 1 运行矩阵：**20 用户 × 5 sessions；3 个 memory 系统（`mock` / `mem0` / `letta`）× 2 个 writer（naive / provenance）× 5 seeds = 30 runs**。
+3. 主指标 CMR；副指标 SFB / AL / CR；必须并列报告 Coverage / IDR / Quality。
+4. Gate 1 阈值：naive CMR ≥ 20%；provenance 相对下降 ≥ 30%；Quality 下降 ≤ 5%。
+5. 20 个 pilot 用户全部用于 Gate 1；阈值与 `τ_durable` 预注册，不在 Gate 1 上调参。
+6. `AL` / `CR` 若未实现，报告 `not_implemented`，不得用替代指标冒充。
+7. 若 `letta` 不可用，用 `a-mem` 替换并记录；真实 adapter 至少保留一个。
+
+### 依据
+
+- D4 需要固定 pilot 协议与 Gate 1 配置，避免 D5/Week 2 临时拍脑袋；
+- CMR / SFB 需要统一的用户数、session 数、memory budget 和 seed；
+- 3 memory × 2 writer × 5 seeds 可以在可接受成本内回答“writer 是否有效、后端是否稳健”；
+- 预注册阈值可以防止在 test 上调参。
+
+### 未决问题
+
+| # | 问题 | 负责人 | 截止 |
+|---|---|---|---|
+| 1 | `letta` 是否可用？不可用时是否用 `a-mem` 替换 | P3 | D5 |
+| 2 | Writer 模型选哪个？Gate 1 是否允许真实 LLM API | P4 | D5 |
+| 3 | `AL` / `CR` 是否在 Gate 1 实现 | P5 | D5 |
+| 4 | MemoryCD 的 HF revision / checksum | P2 | D5 |
+| 5 | schema v1 冻结（`D4-002`） | P1 + P2–P4 | D4 17:00 |
+
+### 后续动作
+
+| 动作 | 负责人 | 截止 | 产出 |
+|---|---|---|---|
+| 产出 20 用户子集与 manifest | P2 | D4 | `pilot_users.jsonl` / `manifest.json` |
+| MockMemory + 一个真实 adapter 可 add/search | P3 | D4 | adapter smoke 记录 |
+| 固定 writer 模型与 prompt v1 | P4 | D5 | `prompt_v1.md` |
+| 实现 CMR/SFB 与 runner | P5 | D5 | `metrics.py` / `run_pilot.py` |
+| 主持 D5 demo 与复盘 | P1 | D5 | `week1_review.md` |
 
 ### 签字
 
