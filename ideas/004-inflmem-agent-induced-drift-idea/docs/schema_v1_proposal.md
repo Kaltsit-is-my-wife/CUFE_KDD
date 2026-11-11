@@ -2,7 +2,7 @@
 
 > 项目：InflMem / Agent-Induced Drift
 > 产出人：@member-01（P1）
-> 状态：**proposed，未冻结**；需 P2–P4 确认后由 P1 在 D4 17:00 签字
+> 状态：**v1 已冻结（2026-11-12，D4-002）**；默认全组按此实现，变更需 RFC + 24h 评论
 > 日期：2026-11-12
 > 上游：[schema_review.md](schema_review.md)、[decisions.md](decisions.md) 的 `D3-001`、[metrics.md](metrics.md)
 > 下游：P2 `InteractionEvent`、P3 `MemoryRecord` / `WriteDecision`、P4 writer、P5 `metrics.py`
@@ -261,17 +261,19 @@
 
 ---
 
-## 8. 待 P2–P4 确认的问题
+## 8. 默认决定与后续变更（已冻结）
 
-| # | 问题 | 负责人 | 截止 |
-|---|---|---|---|
-| 1 | `memory_type` / `evidence_type` 枚举是否最终确定 | P4 | D4 17:00 |
-| 2 | `candidate_set` 是否需要保存完整候选及排序 | P2 | D4 17:00 |
-| 3 | `attribute` / `value` 是单值还是列表（多属性） | P3 + P4 | D4 17:00 |
-| 4 | `text` 是否作为必填字段，是否允许为空 | P4 | D4 17:00 |
-| 5 | `influence_prob` 的估计方法（规则/LLM/混合） | P4 | D5 |
-| 6 | `exposure.propensity` 是否允许 writer 使用 | P1 + P4 | D4 17:00 |
-| 7 | `turn` 是否跨 session 重置（当前提案：重置） | P2 | D4 17:00 |
+以下问题不再等待逐项确认，按本提案默认值执行；如确需修改，走 RFC（24 小时评论 + P1 签字）。
+
+| # | 默认决定 |
+|---|---|
+| 1 | `memory_type` / `evidence_type` 枚举按 §4.1 执行 |
+| 2 | `candidate_set` 保存完整候选与排序 |
+| 3 | `attribute` / `value` 为单值；多属性写成多条 `MemoryRecord` |
+| 4 | `text` 必填，允许简短，但不得为空 |
+| 5 | `influence_prob` 由可观测字段估计（规则/LLM/混合），不得直接用 hidden label |
+| 6 | `exposure.propensity` 允许 writer 使用，但必须在方法中说明来源 |
+| 7 | `turn` 在每个 session 内从 0 开始，跨 session 重置 |
 
 ---
 
@@ -280,3 +282,4 @@
 | 日期 | 版本 | 变更 | 记录人 |
 |---|---|---|---|
 | 2026-11-12 | v1-proposal | 初稿：四个 schema 的字段、枚举、示例、校验规则、指标映射 | @member-01 |
+| 2026-11-12 | v1 | 按 `D4-002` 冻结；全组默认使用，变更需 RFC | @member-01 |

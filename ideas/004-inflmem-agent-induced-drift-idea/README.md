@@ -65,11 +65,13 @@
 
 | 引用 | 关键方法/结论 | 与本 idea 的关系 | 待验证差异 |
 |---|---|---|---|
-| AcCoRD (arXiv:2608.27818) | 交互式偏好动态 harness；100 购物 + 100 旅行场景；LLM user simulator | Stage 2 交互底座 | 单 session；无跨会话 memory；agent 不改变 latent preference |
-| MemoryCD (arXiv:2603.25973) | 真实跨年用户历史与商品库；4 类任务 | Stage 1 真实历史底座 | 无交互、无推荐动作、无 influence 标签 |
-| CALMRec (arXiv:2607.23647) | exposure bias 识别 + propensity weighting | 方法论近邻 / baseline | 面向推荐排序，不是自然语言 memory write；代码可得性未确认 |
-| CAPTURE (arXiv:2609.02265) | POMDP belief tracking；区分真实漂移与 memory poisoning | 概念 baseline | 未把 agent action 当作偏好变化的因；代码未找到 |
-| ULSPB (arXiv:2605.06731) | routine chats 导致授权边界漂移 | 现象与任务设计参考 | 无 LICENSE；偏好≠安全状态；不直接复用代码 |
+| AcCoRD (arXiv:2608.27818, 已核对) | 100 购物 + 100 旅行场景；四类偏好动态；LLM user simulator；最强模型 Perfect Outcome <30% | Stage 2 交互底座 | 单 session；无跨会话 memory；agent 不改变 latent preference |
+| MemoryCD (arXiv:2603.25973, 已核对) | Amazon Review，12 域；4 类任务；14 LLM × 6 memory 方法 | Stage 1 真实历史底座 | 无交互、无推荐动作、无 influence 标签 |
+| CALMRec (arXiv:2607.23647, 已核对) | 三时间尺度记忆 + semantic atoms + propensity weighting；长期价值 +6.1%~7.6% | 方法论近邻 / baseline | 推荐排序而非 memory write；无 compliance/internalization；无 W0/W1 |
+| CAPTURE (arXiv:2609.02265, 已核对) | 连续时间 POMDP + 多时间尺度 ledger + scope/quarantine/ask；D-PREFGUARD | 概念 baseline | 核心是 drift vs poisoning，不是 agent-induced compliance；无 W0/W1 |
+| ULSPB (arXiv:2605.06731, 已核对) | 350 个 24-turn routine 设置；Harm Score；routine 对话 poison 长期状态；StateGuard writeback audit | 现象与防御参考 | 研究 security / authorization drift，不是 preference drift；LICENSE 待核实 |
+
+> 五篇论文已于 2026-11-12 全部核对原文，详见 [`docs/paper_reading_log.md`](docs/paper_reading_log.md)；完整对照、研究脉络、baseline 计划与 related work 草稿见 [`docs/related_work.md`](docs/related_work.md)。
 | Mem0 / Letta / A-MEM | 生产级 memory 接口与检索 | 真实 backend / baseline | 写入策略默认“行为即偏好” |
 | MemGym (arXiv:2605.20833) | memory manager 接口、标准评测循环 | 接口参考 | 缺少 influence 场景与反事实 |
 
@@ -86,7 +88,7 @@
 - **成功标准**：Gate 1 中 naive CMR ≥ 20%、provenance 相对下降 ≥ 30%、Quality 下降 ≤ 5%。
 - **停止条件**：CMR 在所有 domain < 10%，或 provenance prompt 单独解决 80% 以上问题 → 收缩为诊断工具或转向。
 
-详细指标口径见 [`docs/metrics.md`](docs/metrics.md)，schema review、v1 提案与决策见 [`docs/schema_review.md`](docs/schema_review.md)、[`docs/schema_v1_proposal.md`](docs/schema_v1_proposal.md)、[`docs/decisions.md`](docs/decisions.md)，pilot 协议与 Gate 1 配置见 [`docs/pilot_protocol.md`](docs/pilot_protocol.md)、[`docs/gate1_config.yaml`](docs/gate1_config.yaml)，Week 1 复盘与风险见 [`docs/week1_review.md`](docs/week1_review.md)、[`docs/week1_risks.md`](docs/week1_risks.md)，Week 1 计划见 [`experiment.md`](experiment.md)。
+详细指标口径见 [`docs/metrics.md`](docs/metrics.md)，schema review、v1 提案与决策见 [`docs/schema_review.md`](docs/schema_review.md)、[`docs/schema_v1_proposal.md`](docs/schema_v1_proposal.md)、[`docs/decisions.md`](docs/decisions.md)，pilot 协议与 Gate 1 配置见 [`docs/pilot_protocol.md`](docs/pilot_protocol.md)、[`docs/gate1_config.yaml`](docs/gate1_config.yaml)，Week 1 复盘、风险与交接见 [`docs/week1_review.md`](docs/week1_review.md)、[`docs/week1_risks.md`](docs/week1_risks.md)、[`docs/week1_handoff.md`](docs/week1_handoff.md)，原文核对与 related work 见 [`docs/paper_reading_log.md`](docs/paper_reading_log.md)、[`docs/related_work.md`](docs/related_work.md)，Week 1 计划见 [`experiment.md`](experiment.md)。
 
 ## 9. 风险与限制
 
@@ -106,9 +108,10 @@
 | 2026-11-12 | @member-01 | Week 1–2 只做 MemoryCD Stage 1；AcCoRD 第 3 周再接入 | 避免 WebShop/Java 成为关键路径 | 先跑 20 用户 pilot |
 | 2026-11-12 | @member-01 | 本周指标先实现 CMR / SFB；AL / OUR / CR 允许占位 | 本周目标是证明“可测”，不是“显著” | P5 实现 `metrics.py` |
 | 2026-11-12 | @member-01 | 建议三个 schema 周四 17:00 冻结 v1；字段变更走 RFC（待 kickoff 确认） | 防止 D2 后各自实现一套字段 | D3 schema review |
-| 2026-11-12 | @member-01 | D3 schema review v0 完成；v1 变更清单见 `docs/decisions.md` 的 `D3-001`，D4 17:00 冻结（待 P2–P5 确认） | CMR/IDR 需要 `memory_type`；Coverage 需要 `WriteDecision`；SFB 需要 exposure | P2–P4 按清单修改 schema |
+| 2026-11-12 | @member-01 | D3 schema review v0 完成；v1 变更清单见 `docs/decisions.md` 的 `D3-001`，D4 17:00 冻结；已按 `D4-002` 冻结，默认全组使用 | CMR/IDR 需要 `memory_type`；Coverage 需要 `WriteDecision`；SFB 需要 exposure | P2–P4 按 v1 实现 |
 | 2026-11-12 | @member-01 | D4 pilot 协议与 Gate 1 配置 v0 完成：20 用户 × 5 sessions；3 memory × 2 writer × 5 seeds；主指标 CMR；阈值预注册 | 需要固定 Gate 1 口径，避免临时拍脑袋 | P2–P5 按协议实现；schema v1 待冻结 |
-| 2026-11-12 | @member-01 | 完成 schema v1 提案与 week1_review 草稿；schema v1 冻结待 P2–P4 确认 | 先固定字段与复盘结构，避免 D5 临时补 | P2–P4 确认 schema；D5 跑 demo |
+| 2026-11-12 | @member-01 | 完成 schema v1 提案与 week1_review 草稿；schema v1 已按 `D4-002` 冻结 | 先固定字段与复盘结构，避免 D5 临时补 | P2–P5 按 v1 实现；D5 跑 demo |
+| 2026-11-12 | @member-01 | Schema v1 按 `D4-002` 冻结；默认全组使用，变更需 RFC | 当前 P1 设置即最终设置，避免逐字段等待和口径分歧 | P2–P5 直接按 v1 实现 |
 
 ## 11. 结论与后续
 

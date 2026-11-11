@@ -38,7 +38,10 @@ MemoryCD 20 用户
 | `schema_v1_proposal.md` | 完成 v0 | 四个 schema 的 P1 提案（含 `WriteDecision`）、示例、校验规则、指标映射 |
 | `pilot_protocol.md` | 完成 v0 | Week 1 最小链路、Week 2 Gate 1 矩阵、控制与公平性 |
 | `gate1_config.yaml` | 完成 v0 | 20 用户 × 5 sessions；3 memory × 2 writer × 5 seeds；阈值 |
-| `decisions.md` | 完成 2 条 | D3-001 schema review；D4-001 pilot 协议与 Gate 1 配置 |
+| `decisions.md` | 完成 3 条 | D3-001 schema review；D4-001 pilot 协议与 Gate 1 配置；D4-002 schema v1 冻结 |
+| `paper_reading_log.md` | 完成 | 5/5 已核对原文；CALMRec / CAPTURE / AcCoRD / MemoryCD / ULSPB 的摘要与差异已补齐 |
+| `related_work.md` | 完成 | 五篇论文对照、研究脉络、正面比较、baseline 计划、组件映射、novelty 威胁与 related work 草稿 |
+| `week1_handoff.md` | 完成 | 给 P2–P5 的交接说明：任务、DoD、接口、demo、Gate 1、阻塞与立即行动 |
 
 ---
 
@@ -51,7 +54,7 @@ MemoryCD 20 用户
 | MockMemory + 真实 adapter | P3 | 未开始 | 依赖 schema v1；Mem0/Letta 安装未验证 | `MemoryRecord` 字段冻结 |
 | naive / provenance writer | P4 | 未开始 | 依赖事件 schema 与 writer 模型 | `InteractionEvent` 字段冻结；model/API |
 | `metrics.py` + `run_pilot.py` | P5 | 未开始 | 依赖事件、memory、writer 输出 | P2–P4 的最小产物 |
-| schema v1 冻结 | P1 + P2–P4 | 未完成 | 需要 P2–P4 的实际 schema 实现 | 采纳或修改 `schema_v1_proposal.md` |
+| schema v1 冻结 | P1 | 已完成（`D4-002`） | — | 默认全组使用；变更走 RFC |
 | 周五 demo | 全员 | 未运行 | 上述依赖未就绪 | 最小链路跑通 |
 
 ---
@@ -84,13 +87,14 @@ MemoryCD 20 用户
 
 - MemoryCD 的 HF 下载、字段、用户历史长度尚未核对；
 - Mem0 / Letta 的安装与 API 访问未验证；
+- 五篇论文均已核对原文；下一步是把论文结论转成 schema / protocol 中的具体字段与 baseline；
 - 预案：保留 MockMemory；Gate 1 至少一个真实 adapter；记录 blocker，不停工。
 
-### 5.2 schema v1 尚未冻结
+### 5.2 schema v1 已冻结（D4-002）
 
-- `memory_type`、`WriteDecision`、`InteractionEvent.context`、`exposure.source/position` 仍待 P2–P4 确认；
-- 若继续用口头字段，P5 的 CMR/Coverage 会出现口径分歧；
-- 下一步：P2–P4 按 [schema_v1_proposal.md](schema_v1_proposal.md) 确认或修改，D4 17:00 冻结。
+- `memory_type`、`WriteDecision`、`InteractionEvent.context`、`exposure.source/position` 已按 [schema_v1_proposal.md](schema_v1_proposal.md) 固化；
+- 默认设置即全组设置；P2–P5 直接按 v1 实现；
+- 如某字段不可实现，必须提 RFC（24 小时评论 + P1 签字），不得静默改字段。
 
 ### 5.3 writer 模型与指标实现未定
 
@@ -104,14 +108,14 @@ MemoryCD 20 用户
 
 | 角色 | Week 2 任务 | 产出 | 截止 |
 |---|---|---|---|
-| P1 | 冻结 schema v1；主持 Gate 1 预注册；检查指标口径 | `decisions.md` D4-002；Gate 1 protocol | 第 2 周周一 |
+| P1 | schema v1 已冻结；主持 Gate 1 预注册；检查指标口径 | `decisions.md` D4-002；Gate 1 protocol | 第 2 周周一 |
 | P2 | 20 用户 × 5 sessions 的完整事件流；data QA | `events.jsonl`、`data_qa_v1.md` | 第 2 周周二 |
 | P3 | 3 个 memory 系统可 add/search；snapshot/restore | adapter 报告、`memories.jsonl` | 第 2 周周三 |
 | P4 | writer v1（naive/provenance）稳定输出；prompt v1 冻结 | `prompt_v1.md`、writer 输出 | 第 2 周周三 |
 | P5 | `run_pilot.py` 跑 30 runs；CMR/SFB 汇总 | `metrics.json`、主表、图 | 第 2 周周四 |
 | 全员 | Gate 1 评审 | Go/No-Go 记录 | 第 2 周周五 |
 
-**Gate 1 配置**：见 [pilot_protocol.md](pilot_protocol.md) §4 与 [gate1_config.yaml](gate1_config.yaml)。
+**Gate 1 配置**：见 [pilot_protocol.md](pilot_protocol.md) §4 与 [gate1_config.yaml](gate1_config.yaml)。角色任务与 DoD 见 [week1_handoff.md](week1_handoff.md)。
 
 ---
 
@@ -131,8 +135,8 @@ MemoryCD 20 用户
 
 | # | 事项 | 负责人 | 截止 | 状态 |
 |---|---|---|---|---|
-| 1 | 确认或修改 schema v1 提案 | P2–P4 | D4 17:00 | 待办 |
-| 2 | 记录 schema v1 冻结决定 `D4-002` | P1 | D4 17:00 | 待办 |
+| 1 | 按 schema v1 实现各自模块 | P2–P5 | D5 | 待办 |
+| 2 | 记录 schema v1 冻结决定 `D4-002` | P1 | D4 17:00 | 已完成 |
 | 3 | 20 用户子集与 manifest | P2 | D4 | 待办 |
 | 4 | MockMemory + 真实 adapter smoke | P3 | D4 | 待办 |
 | 5 | writer 模型 / prompt v1 | P4 | D5 | 待办 |

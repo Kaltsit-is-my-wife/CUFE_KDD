@@ -190,7 +190,7 @@ runs/<run_id>/
 | MemoryCD 下载失败 | HF 网络/字段不可用 | 用公开小样例 + 合成 catalog；记录 blocker | P2 |
 | Mem0/Letta 安装失败 | 依赖冲突、需要 API key | 保留 MockMemory；Gate 1 用 `mock` + 一个真实 adapter | P3 |
 | Writer 模型未定 | API/预算未确认 | Week 1 用 fixture/mock writer；Gate 1 前必须固定 | P4 |
-| schema 未冻结 | D4 17:00 仍有字段变更 | 冻结 v1；变更走 RFC + 24h 评论 | P1 |
+| schema v1 冻结后仍有 RFC 变更 | 有人提出字段变更 | 按 RFC 流程评审；默认 v1 不变 | P1 |
 | AL / CR 未实现 | 指标返回 `null` | 报告 `not_implemented`，不阻塞 Gate 1 主判定 | P5 |
 | 20 用户样本太小 | CI 过宽 | Gate 1 只做 go/no-go；主实验扩到 100 用户 | P1 |
 
@@ -202,11 +202,11 @@ runs/<run_id>/
 
 - [x] `pilot_protocol.md` v0；
 - [x] `gate1_config.yaml` v0；
-- [x] Week 1 / Gate 1 的指标、阈值、run 矩阵、产物路径已定义。
+- [x] Week 1 / Gate 1 的指标、阈值、run 矩阵、产物路径已定义；
+- [x] schema v1 冻结（`D4-002`，默认全组使用）。
 
 **未完成（依赖 P2–P5）：**
 
-- [ ] schema v1 冻结与 P1 签字（需要 P2–P4 的 v0 实现）；
 - [ ] writer 模型与 prompt v1 固定（P4）；
 - [ ] 真实 adapter 的字段映射（P3）；
 - [ ] `metrics.py` 与 `run_pilot.py`（P5）；

@@ -156,6 +156,72 @@
 
 ---
 
+## D4-002：Schema v1 冻结（默认全组使用）
+
+| 字段 | 内容 |
+|---|---|
+| 决策编号 | `D4-002` |
+| 日期 | 2026-11-12 |
+| 主持人 | @member-01（P1） |
+| 参与人 | P1 签字；P2–P5 默认接受 |
+| 状态 | `frozen` |
+| 影响范围 | P2/P3/P4/P5 的所有 schema 实现、P5 指标实现、反事实回放 |
+| 关联文档 | [schema_v1_proposal.md](schema_v1_proposal.md)、[schema_review.md](schema_review.md)、[metrics.md](metrics.md) |
+
+### 结论
+
+1. **以 [schema_v1_proposal.md](schema_v1_proposal.md) 作为 schema v1 的最终默认版本。**
+2. P2–P5 **直接按此实现**，不再等待逐字段确认；默认设置即全组设置。
+3. 四个 schema 的职责固定：
+   - `UserState`：hidden/evaluator only，含 `U_t`、shock、counterfactual、labels；
+   - `InteractionEvent`：agent 可见的交互事件；
+   - `MemoryRecord`：可检索、可审计的记忆记录；
+   - `WriteDecision`：写入/abstain 的审计记录。
+4. 关键默认值：
+   - `MemoryRecord` 必须含 `memory_type`、`status`、`source_event_ids`、`counterevidence`、`validity.context`、`supersedes`；
+   - `InteractionEvent` 必须含 `context`、`agent_action.text`、`agent_action.candidate_set`、`exposure.source`、`exposure.position`；
+   - hidden label 只能存在于 `UserState`，不得进入 `InteractionEvent` / `MemoryRecord` / agent prompt；
+   - `text` 必填；多属性写成多条 `MemoryRecord`；`turn` 在每个 session 内从 0 开始。
+5. **变更流程**：任何成员发现字段不可实现或缺失，必须写 1 页 RFC，24 小时评论期，经 P1 签字后修改；不得静默改字段或各自实现一套。
+
+### 依据
+
+- 项目决定：当前 P1 使用的 schema 设置即其他成员默认使用的最终设置，减少等待和口径分歧；
+- `metrics.md` 的 CMR / CMR_cond / SFB / IDR / Coverage 依赖这些字段；
+- 反事实回放依赖 `source_event_ids`、`status`、`supersedes` 和 `WriteDecision`；
+- hidden label 隔离是实验有效性的硬前提。
+
+### 风险与边界
+
+| 风险 | 处理 |
+|---|---|
+| P2–P4 发现某字段难以实现 | 提 RFC，说明替代方案；默认 v1 不变 |
+| 多属性场景需要列表 | 先用多条 `MemoryRecord`；若不够，提 RFC |
+| `influence_prob` 估计不准 | 记录估计方法；在报告中做敏感性分析，不修改 schema |
+| `letta` 等后端字段映射缺失 | 在 adapter 层做映射，不把后端原始格式泄露到 `MemoryRecord` |
+
+### 后续动作
+
+| 动作 | 负责人 | 截止 | 产出 |
+|---|---|---|---|
+| 按 schema v1 实现 `InteractionEvent` | P2 | D5 | 事件生成器 + 校验 |
+| 按 schema v1 实现 `MemoryRecord` / `WriteDecision` / backend | P3 | D5 | MockMemory + adapter |
+| 按 schema v1 实现 naive / provenance writer | P4 | D5 | writer 输出 |
+| 按 schema v1 实现 CMR / SFB / Coverage | P5 | D5 | `metrics.py` |
+| 任何字段变更走 RFC | 全员 | 持续 | RFC + `decisions.md` 记录 |
+
+### 签字
+
+| 角色 | 姓名/编号 | 结论 | 日期 |
+|---|---|---|---|
+| P1 Lead / 因果与评测 | @member-01 | 已签字，v1 冻结 | 2026-11-12 |
+| P2 Sim / Data | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
+| P3 Memory | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
+| P4 Method | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
+| P5 Eval / Analysis | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
+
+---
+
 ## 后续决策条目模板
 
 > 复制以下结构追加，不要删除历史条目。

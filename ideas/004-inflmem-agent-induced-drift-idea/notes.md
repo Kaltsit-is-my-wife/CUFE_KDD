@@ -3,46 +3,59 @@
 > 本文件记录文献笔记、数据观察、头脑风暴、讨论和被否决的方向。完整项目说明见
 > [`docs/references/2026-10-30_Agent-Induced-Drift_研究Idea说明.md`](docs/references/2026-10-30_Agent-Induced-Drift_研究Idea说明.md)，
 > Week 1 任务见 [`docs/references/2026-10-30_Week1_五人任务清单.md`](docs/references/2026-10-30_Week1_五人任务清单.md)。
+> PDF 核对状态：5/5 已核对原文。详见 [docs/paper_reading_log.md](docs/paper_reading_log.md)；完整对照、研究脉络与 baseline 计划见 [docs/related_work.md](docs/related_work.md)。
 
 ## 文献笔记
 
-### AcCoRD（arXiv:2608.27818）
+### AcCoRD（arXiv:2608.27818，已核对原文）
 
+- **完整标题/作者**：*ACCORD: Evaluating User-Agent Collaboration Under Realistic User Preference Dynamics*；Tejas Srinivasan, Shikib Mehri, Nandita Naik, Anirban Das, William M. Campbell, Jesse Thomason（USC / Contextual AI / Capital One / Georgia Tech）。
 - **研究问题**：在真实用户偏好动态下评测用户–agent 协作。
-- **数据集/环境**：100 个购物场景 + 100 个旅行场景；LLM user simulator；四类偏好动态（hard/soft underspecification、unachievable、triggered）。
-- **方法**：交互式 harness，含 satisfaction / task success 评测、consistency checking 和 rollout。
+- **数据集/环境**：ACCORD-Shop 100 个场景 + ACCORD-Travel 100 个场景；四类偏好动态（hard/soft underspecification、unachievable、triggered）；GPT-5.1 user simulator + consistency checking。
+- **方法**：POMDP 交互 harness；5 个前沿 LLM × ReAct / UncReAct；最多 50 环境步、20 轮对话。
+- **关键结果**：最强 Claude-Sonnet-4.5 的 Perfect Outcome Rate 仍低于 30%；unachievable / triggered 最难；UncReAct prompting 基本不改善。
 - **对本 idea 的启发**：适合做 Stage 2 交互真实性底座；四类偏好动态可以测试不同 failure mode。
 - **差异/风险**：单 session；无跨会话 memory；agent 不改变 latent preference；无反事实 ground truth。
 - **可复现实验**：先 text-only 读取场景 JSON，不启动 WebShop/Java。
 
-### MemoryCD（arXiv:2603.25973）
+### MemoryCD（arXiv:2603.25973，已核对原文）
 
+- **完整标题/作者**：*MemoryCD: Benchmarking Long-Context User Memory of LLM Agents for Lifelong Cross-Domain Personalization*；Weizhi Zhang, Xiaokai Wei, Wei-Chieh Huang, Zheng Hui, Chen Wang, Michelle Gong, Philip S. Yu（Roblox / UIC / Cambridge）。
 - **研究问题**：长上下文用户记忆的跨域个性化评测。
-- **数据集**：323 用户、167,870 商品、12 域；真实跨年行为；4 类任务（rating prediction、review summarization、review generation、item ranking）。
-- **对本 idea 的启发**：Stage 1 的真实历史与商品库底座；用真实商品标题、类别、价格和历史交互减少纯合成 persona 的审稿风险。
-- **差异/风险**：无交互式 agent、无推荐动作、无 influence model、无隐藏偏好与反事实标签。
+- **数据集**：Amazon Review，12 域；主实验 4 域（Personal Care、Books、Electronics、Home & Kitchen）；Table 1 报告 400K context length、1K+ sessions；4 类任务（rating prediction、item ranking、review summarization、review generation）。
+- **方法**：single-domain / cross-domain memory；14 个长上下文 LLM × 6 个 memory 方法（long-context、Mem0、LoCoMo、ReadAgent、MemoryBank、A-Mem）。
+- **关键结果**：没有单一 memory 方法在所有任务上占优；整体指标仍远未达到用户满意；跨域 memory 效果高度依赖源域与目标域的语义对齐。
+- **对本 idea 的启发**：Stage 1 的真实历史与商品库底座；4 类任务可用于个性化评测。
+- **差异/风险**：无交互式 agent、无推荐动作、无 influence model、无隐藏偏好与反事实标签；Idea 说明中的“323 用户 / 167,870 商品”未在已读页核实。
 - **可复现实验**：从 Hugging Face 下载，记录版本、checksum、用户数、item 数、字段；原始数据不入 Git。
 
-### CALMRec（arXiv:2607.23647）
+### CALMRec（arXiv:2607.23647，已核对原文）
 
-- **研究问题**：推荐系统中的 exposure bias 与反馈循环。
-- **方法**：identification + propensity-weighted 更新；电商/新闻/短视频模拟。
-- **对本 idea 的启发**：方法论近邻；propensity weighting 可用于 memory writer 的 exposure 校正。
-- **差异/风险**：面向推荐排序，不处理自然语言 memory write；无 compliance/internalization 概念；代码可得性未确认。
-- **可复现实验**：若代码不可得，按论文重实现简化版 IPW baseline。
+- **完整标题/作者**：*CALMRec: Causally Aligned Language Memory for Long-Horizon Recommendation*；Gengyu Zhan（Shenzhen University）；页面含 AAAI 2026 版权标记。
+- **研究问题**：LLM 推荐器把持久偏好、短期意图、曝光导致的行为混成一个画像，造成反馈循环。
+- **方法**：冻结多模态 LM 编译 semantic atoms；三时间尺度记忆（短期意图 / 长期偏好 / 曝光轨迹）；propensity-weighted updates；conservative offline critic；counterfactual deletion 解释；Proposition 1 给出识别条件。
+- **关键结果**：三个环境 10 seeds，长期价值 +6.1% / +7.6% / +6.7%；去掉 propensity correction 价值降 0.739 ± 0.191；语义原子 NDCG 超 TF-IDF 两倍以上。
+- **对本 idea 的启发**：三时间尺度、exposure trace、propensity、provenance、counterfactual deletion 都可借鉴。
+- **差异/风险**：推荐排序而非自然语言 memory write；无 compliance/internalization；无 agent-suggested vs independent；无 W0/W1 配对反事实；无 memory backend。
+- **可复现实验**：代码可得性仍待确认；若不可得，按论文重实现简化版 IPW baseline。
 
-### CAPTURE（arXiv:2609.02265）
+### CAPTURE（arXiv:2609.02265，已核对原文）
 
-- **研究问题**：区分真实偏好漂移与 memory poisoning。
-- **方法**：POMDP belief tracking。
-- **对本 idea 的启发**：概念 baseline；belief tracking 可作为“记忆中的偏好估计”参照。
-- **差异/风险**：未把 agent action 当作偏好变化的因；代码未找到。
+- **完整标题/作者**：*CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents*；S M Asif Hossain, Ruksat Khan Shayoni, Md Kishor Morol。
+- **研究问题**：preference-authenticity ambiguity；recency/provenance 规则无法区分真实漂移、上下文切换、讽刺和注入。
+- **方法**：连续时间 POMDP + neural ODE；authenticity gate 六动作（retain / add / scope / revise / quarantine / ask）；多时间尺度 ledger；safety-bounded selection；counterfactual audit。
+- **关键结果**：D-PREFGUARD 2,400 episodes、480 held-out；win rate 71.5%；fixed-policy poisoning 11.5%；adherence 83.5%；adaptive attack 24.7%；40 用户 2–3 周 replay；HorizonBench zero-shot。
+- **对本 idea 的启发**：`scope` 可映射到 `validity.context`；`quarantine` 可映射到 `status` + `hedged`；`ask` 可映射到 `abstain` / clarify；多时间尺度 ledger 可借鉴。
+- **差异/风险**：核心是 drift vs poisoning，不是 agent-induced compliance；无 exposure propensity / 随机探索；无 W0/W1 配对反事实；用户研究是 replay。
 
-### ULSPB（arXiv:2605.06731）
+### ULSPB（arXiv:2605.06731，已核对原文）
 
-- **研究问题**：routine chats 导致授权边界漂移。
-- **对本 idea 的启发**：现象与任务设计参考；说明“长期交互会改变状态”不限于偏好。
-- **差异/风险**：无 LICENSE；偏好不是安全状态；不直接复用代码。
+- **完整标题/作者**：*When Routine Chats Turn Toxic: Unintended Long-Term State Poisoning in Personalized Agents*；Xiaoyu Xu, Minxin Du, Qipeng Xie, Haobin Ke, Qingqing Ye, Haibo Hu（PolyU / HKUST (Guangzhou)）。
+- **研究问题**：routine user-agent 交互会逐渐改写长期状态，削弱确认边界、扩大工具默认权限、增加自主行为；称为 unintended long-term state poisoning。
+- **方法/数据**：ULSPB 350 个设置（5 类辅助任务 × 7 种交互模式 × 5 种对话变体 × 2 语言）；每个 routine 24 轮；Harm Score 衡量 authorization drift / tool-use escalation / unchecked autonomy；OpenClaw + 4 个 LLM。
+- **关键结果**：routine conversations 本身就能 poison 长期状态，风险集中在 `MEMORY.md` / `memory/`；真实种子对话也有效；StateGuard 在 writeback 边界审计并回滚，Targeted-Ensemble 可把 HS 降到接近 0，成本 <$0.004/run。
+- **对本 idea 的启发**：支持“良性日常交互会累积成长期状态”；StateGuard 的 writeback audit / rollback 与 provenance writer / 反事实回放思路相近。
+- **差异/风险**：研究 security / authorization drift，不是 preference drift；无 compliance/internalization；无 W0/W1；LICENSE 待核实。
 
 ### Mem0 / Letta / A-MEM
 

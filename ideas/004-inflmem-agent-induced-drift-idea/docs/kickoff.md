@@ -167,15 +167,15 @@ Demo 时必须能指出**一条具体 memory 的来源事件**，并说清 naive
 
 ## 10. D1 阅读结论：五篇底座论文
 
-> 说明：以下要点来自项目 Idea 说明 v1.0 的二手摘要。D1 会前需由指定成员打开原文核对 abstract / method / experiment，若与本表不一致，直接在本表批注并在 kickoff 上修正。
+> 说明：五篇论文已于 2026-11-12 全部核对原文（见 [paper_reading_log.md](paper_reading_log.md)）。
 
 | 论文 | 在本项目中的角色 | 可直接借用 | 关键缺口 / 风险 |
 |---|---|---|---|
-| **AcCoRD** | Stage 2 交互真实性底座 | 100 购物 + 100 旅行场景；LLM user simulator；四类偏好动态；MIT | 单 session；无跨会话 memory；agent 不改变 latent preference；无反事实 ground truth |
-| **MemoryCD** | Stage 1 真实历史底座 | 323 用户、167,870 商品、12 域；真实跨年行为；HF 数据 | 无交互式 agent、无推荐动作、无 influence、无隐藏偏好标签 |
-| **CALMRec** | 方法论近邻 / baseline | exposure bias 识别 + propensity weighting | 面向推荐排序，不是自然语言 memory write；无 compliance/internalization；代码可得性未确认 |
-| **CAPTURE** | 概念 baseline | POMDP belief tracking；区分真实漂移与 memory poisoning | 未把 agent action 当作偏好变化的因；代码未找到 |
-| **ULSPB** | 现象与任务设计参考 | routine chats 导致授权边界漂移 | 无 LICENSE；偏好≠安全状态；不直接复用代码 |
+| **AcCoRD**（已核对原文） | Stage 2 交互真实性底座 | 100 购物 + 100 旅行场景；四类偏好动态（hard/soft/unsatisfiable/triggered）；LLM user simulator；最强模型 Perfect Outcome <30% | 单 session；无跨会话 memory；agent 不改变 latent preference；无反事实 ground truth |
+| **MemoryCD**（已核对原文） | Stage 1 真实历史底座 | Amazon Review，12 域（主实验 4 域）；4 类任务；14 LLM × 6 memory 方法；真实跨年行为 | 无交互式 agent、无推荐动作、无 influence、无隐藏偏好标签；323 用户/167,870 商品待数据核实 |
+| **CALMRec**（已核对原文） | 方法论近邻 / baseline | 三时间尺度记忆（短期意图/长期偏好/曝光轨迹）；semantic atoms + provenance；propensity weighting；counterfactual deletion；Proposition 1 | 面向推荐排序，不是自然语言 memory write；无 compliance/internalization；无 agent-suggested vs independent；无 W0/W1 配对反事实 |
+| **CAPTURE**（已核对原文） | 概念 baseline | 连续时间 POMDP + neural ODE；多时间尺度 ledger；scope/quarantine/ask；counterfactual audit；D-PREFGUARD 2,400 episodes | 核心是 drift vs poisoning，不是 agent-induced compliance；无 exposure propensity/随机探索；无 W0/W1 配对反事实；用户研究是 replay |
+| **ULSPB**（已核对原文） | 现象与防御参考 | 350 个 24-turn routine 设置；Harm Score；routine 对话会 poison memory-centric state；StateGuard writeback audit | 研究 authorization / tool-use drift，不是 preference drift；无 compliance/internalization；无 W0/W1；LICENSE 待核实 |
 
 **阅读后要回答的一个问题：** 这五篇里，哪一篇能直接支撑“agent action 是记忆误归因的因”这一 claim？如果都不能，我们的差异化就必须落在 benchmark 的反事实设计与 writer 的 provenance 上。
 

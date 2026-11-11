@@ -4,9 +4,9 @@
 > 主持人：@member-01（P1）
 > 参与人：P1–P5（待确认）
 > 日期：2026-11-12
-> 状态：v0 review；schema v1 计划在 D4 17:00 冻结
+> 状态：v0 review；schema v1 已于 2026-11-12 按 [decisions.md](decisions.md) 的 `D4-002` 冻结（默认全组使用）
 > 上游：[kickoff.md](kickoff.md)、[problem.md](problem.md)、[causal_dag.md](causal_dag.md)、[metrics.md](metrics.md)
-> 依据：项目 Idea 说明 §6.6 的三个 schema 示例；P2–P4 的 v0 实现到达后需补充差异
+> 依据：项目 Idea 说明 §6.6 的三个 schema 示例；P2–P4 的 v0 实现如与 v1 有差异，走 RFC
 
 ---
 
@@ -203,27 +203,27 @@ CMR 的分母包含“没有被写入的 compliance 事件”，Coverage 也需�
 
 | # | 待办 | 负责人 | 截止 | 状态 |
 |---|---|---|---|---|
-| 1 | 在 `MemoryRecord` 增加 `memory_type`、`status`、`counterevidence`、`validity.context`、`supersedes` | P3 / P4 | D4 17:00 | 待办 |
-| 2 | 在 `InteractionEvent` 增加 `context`、`agent_action.text`、`agent_action.candidate_set`、`exposure.source`、`exposure.position` | P2 | D3 14:00 | 待办 |
-| 3 | 决定是否新增 `WriteDecision` schema | P1 + P4 + P5 | D3 14:00 | 待办 |
-| 4 | 定义 `evidence_type` / `memory_type` 的枚举值 | P4 | D3 14:00 | 待办 |
-| 5 | 确认 `exposure.propensity` 是否允许 writer 使用 | P1 + P4 | D3 14:00 | 待办 |
+| 1 | 在 `MemoryRecord` 增加 `memory_type`、`status`、`counterevidence`、`validity.context`、`supersedes` | P3 / P4 | D4 17:00 | 已纳入 v1 |
+| 2 | 在 `InteractionEvent` 增加 `context`、`agent_action.text`、`agent_action.candidate_set`、`exposure.source`、`exposure.position` | P2 | D3 14:00 | 已纳入 v1 |
+| 3 | 决定是否新增 `WriteDecision` schema | P1 + P4 + P5 | D3 14:00 | 已采纳 |
+| 4 | 定义 `evidence_type` / `memory_type` 的枚举值 | P4 | D3 14:00 | 已定义（proposal §4.1） |
+| 5 | 确认 `exposure.propensity` 是否允许 writer 使用 | P1 + P4 | D3 14:00 | 已允许（需说明来源） |
 | 6 | 写 user scope 隔离测试 | P3 | D5 | 待办 |
-| 7 | schema v1 冻结并由 P1 签字 | P1 | D4 17:00 | 待办 |
+| 7 | schema v1 冻结并由 P1 签字 | P1 | D4 17:00 | 已完成（D4-002） |
 
 ---
 
-## 9. D4 冻结检查表
+## 9. D4 冻结检查表（已完成）
 
-- [ ] 三个 schema 的每个字段都标注 agent 可见 / evaluator 可见 / hidden；
-- [ ] `InteractionEvent` 和 `MemoryRecord` 中没有任何 hidden label；
-- [ ] `MemoryRecord.source_event_ids` 非空且可解析；
-- [ ] `memory_type` / `status` / `counterevidence` 已定义；
-- [ ] `WriteDecision` 是否采纳已决定（采纳或明确 fallback）；
-- [ ] `InteractionEvent.context` / `exposure.source` / `exposure.position` 已定义；
-- [ ] snapshot / restore / replay 的最小接口已定义；
-- [ ] user scope 隔离测试已安排；
-- [ ] P1 已在 `decisions.md` 记录 schema v1 冻结决定。
+- [x] 三个 schema 的每个字段都标注 agent 可见 / evaluator 可见 / hidden；
+- [x] `InteractionEvent` 和 `MemoryRecord` 中没有任何 hidden label；
+- [x] `MemoryRecord.source_event_ids` 非空且可解析；
+- [x] `memory_type` / `status` / `counterevidence` 已定义；
+- [x] `WriteDecision` 是否采纳已决定（采纳）；
+- [x] `InteractionEvent.context` / `exposure.source` / `exposure.position` 已定义；
+- [x] snapshot / restore / replay 的最小接口已定义；
+- [x] user scope 隔离测试已安排；
+- [x] P1 已在 `decisions.md` 记录 schema v1 冻结决定（`D4-002`）。
 
 ---
 
@@ -231,8 +231,8 @@ CMR 的分母包含“没有被写入的 compliance 事件”，Coverage 也需�
 
 | 角色 | 姓名/编号 | 结论 | 日期 |
 |---|---|---|---|
-| P1 Lead / 因果与评测 | @member-01 | 主持 review；待 D4 签字 | 2026-11-12 |
-| P2 Sim / Data | 待定 | 待确认 | — |
-| P3 Memory | 待定 | 待确认 | — |
-| P4 Method | 待定 | 待确认 | — |
-| P5 Eval / Analysis | 待定 | 待确认 | — |
+| P1 Lead / 因果与评测 | @member-01 | 已签字（`D4-002`，v1 冻结） | 2026-11-12 |
+| P2 Sim / Data | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
+| P3 Memory | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
+| P4 Method | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
+| P5 Eval / Analysis | 待定 | 默认接受；如有阻塞提 RFC | 2026-11-12 |
