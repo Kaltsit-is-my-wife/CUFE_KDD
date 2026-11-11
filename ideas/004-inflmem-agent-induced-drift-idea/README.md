@@ -86,7 +86,7 @@
 - **成功标准**：Gate 1 中 naive CMR ≥ 20%、provenance 相对下降 ≥ 30%、Quality 下降 ≤ 5%。
 - **停止条件**：CMR 在所有 domain < 10%，或 provenance prompt 单独解决 80% 以上问题 → 收缩为诊断工具或转向。
 
-详细指标口径见 [`docs/metrics.md`](docs/metrics.md)，schema review 与决策见 [`docs/schema_review.md`](docs/schema_review.md)、[`docs/decisions.md`](docs/decisions.md)，pilot 协议与 Gate 1 配置见 [`docs/pilot_protocol.md`](docs/pilot_protocol.md)、[`docs/gate1_config.yaml`](docs/gate1_config.yaml)，Week 1 计划见 [`experiment.md`](experiment.md)。
+详细指标口径见 [`docs/metrics.md`](docs/metrics.md)，schema review、v1 提案与决策见 [`docs/schema_review.md`](docs/schema_review.md)、[`docs/schema_v1_proposal.md`](docs/schema_v1_proposal.md)、[`docs/decisions.md`](docs/decisions.md)，pilot 协议与 Gate 1 配置见 [`docs/pilot_protocol.md`](docs/pilot_protocol.md)、[`docs/gate1_config.yaml`](docs/gate1_config.yaml)，Week 1 复盘与风险见 [`docs/week1_review.md`](docs/week1_review.md)、[`docs/week1_risks.md`](docs/week1_risks.md)，Week 1 计划见 [`experiment.md`](experiment.md)。
 
 ## 9. 风险与限制
 
@@ -108,6 +108,7 @@
 | 2026-11-12 | @member-01 | 建议三个 schema 周四 17:00 冻结 v1；字段变更走 RFC（待 kickoff 确认） | 防止 D2 后各自实现一套字段 | D3 schema review |
 | 2026-11-12 | @member-01 | D3 schema review v0 完成；v1 变更清单见 `docs/decisions.md` 的 `D3-001`，D4 17:00 冻结（待 P2–P5 确认） | CMR/IDR 需要 `memory_type`；Coverage 需要 `WriteDecision`；SFB 需要 exposure | P2–P4 按清单修改 schema |
 | 2026-11-12 | @member-01 | D4 pilot 协议与 Gate 1 配置 v0 完成：20 用户 × 5 sessions；3 memory × 2 writer × 5 seeds；主指标 CMR；阈值预注册 | 需要固定 Gate 1 口径，避免临时拍脑袋 | P2–P5 按协议实现；schema v1 待冻结 |
+| 2026-11-12 | @member-01 | 完成 schema v1 提案与 week1_review 草稿；schema v1 冻结待 P2–P4 确认 | 先固定字段与复盘结构，避免 D5 临时补 | P2–P4 确认 schema；D5 跑 demo |
 
 ## 11. 结论与后续
 

@@ -78,12 +78,12 @@
 | D1 kickoff / 论文阅读 | P1 | 2026-11-12 | `kickoff.md` 可评审 | 完成 |
 | D2 问题定义 / DAG | P1 | 2026-11-12 | `problem.md`、`causal_dag.md` 可评审 | 完成 |
 | D3 指标口径 / schema review | P1 | 2026-11-12 | `metrics.md` v0；`schema_review.md`；`decisions.md` D3-001 | 完成（v0 review） |
-| D4 pilot 协议 / Gate 1 配置 | P1 | 2026-11-12 | `pilot_protocol.md`；`gate1_config.yaml`；schema v1 冻结 | 部分完成（协议/配置 v0；schema v1 待 P2–P4） |
-| D5 Demo / 复盘 | P1 | 2026-11-15 | demo 通过；`week1_review.md` | not-started |
+| D4 pilot 协议 / Gate 1 配置 | P1 | 2026-11-12 | `pilot_protocol.md`；`gate1_config.yaml`；schema v1 提案 | 部分完成（协议/配置 + schema 提案；schema v1 待签字） |
+| D5 Demo / 复盘 | P1 | 2026-11-15 | demo 通过；`week1_review.md` | 草稿（demo 待 P2–P5 产物） |
 | Week 2 Gate 1 | P1 + P5 | 第 2 周末 | naive CMR ≥ 20%；provenance 相对下降 ≥ 30% | not-started |
 
 ## 9. 当前状态
 
-- 已完成：问题定义、因果 DAG、指标口径 v0、schema review v0、`decisions.md` D3-001、pilot 协议与 Gate 1 配置 v0、Week 1 kickoff 草案。
+- 已完成：问题定义、因果 DAG、指标口径 v0、schema review v0、schema v1 提案、`decisions.md` D3-001/D4-001、pilot 协议与 Gate 1 配置 v0、`week1_review.md` 草稿、Week 1 kickoff 草案。
 - 尚未完成：schema v1 冻结、`metrics.py`、20 用户子集、simulator、memory adapter、demo。
 - 当前结论：尚无实验结论；本文件中的数值均为待验证假设。
