@@ -19,6 +19,7 @@
 | 001 | [个人调研与想法总目录](ideas/001-my-research-idea/) | not-started | 个人调研累积容器（文献精读 + idea 候选） | @YuchenLiu | 待定 | idea | not-started | 调研容器，无单一核心假设；子课题成熟后须另开正式编号 | — | — | — | 2026-09-27 | 子课题成熟时另开编号并登记，已衍生出 002 |
 | 002 | [Agent 交互间的语义漂移探测](ideas/002-agent-interaction-drift-idea/) | not-started | 多 agent 交互间的语义漂移检测 | @YuchenLiu | 待定 | idea | not-started | 若将 agent 交互轮编码为可稳定标注的语义原子（role/goal-atom/tool-action/commitment/constraint），则相对 post-hoc 行为指标，逐轮累积原子级转移矩阵能在漂移发生的那一步给出可定位信号，因行为指标是滞后聚合、无法对齐轮次 | post-hoc 行为指标（role adherence、ASI 类复合分）；相邻轮强基线 | 标注一致性 Cohen's κ；漂移率 vs 置换零分布；单步定位 F1 | 待定（候选：CAMEL/AutoGen/MetaGPT 日志 + 自建可控轨迹） | 2026-09-29 | 完成 P1 探针（语义原子标注一致性 κ ≥ 0.6）作为 go/no-go |
 | 003 | [跨会话目标漂移检测与可逆记忆更新](ideas/003-goal-drift-idea/) | [实验](experiments/003-goal-drift/) | 在线目标漂移检测、漂移感知记忆更新与下游任务影响 | @dingyu668 | 待定 | completed | completed | 早期可逆记忆更新应相对确认后更新提高任务成功率至少 0.05，同时保护背景和稳定场景 | No Update；C/D 原始与改进记忆；Oracle Timing 诊断上界 | Early 相对 D 任务增益 0.020（95% CI [0.009, 0.032]）；过时记忆 F1 0.865 | 受控合成轨迹，Phase 3 种子 20270417，测试 224 条 | 2026-10-31 | 未达预注册增益门槛，停止或修订当前实现 |
+| 004 | [InflMem：Agent 诱导的偏好漂移与记忆误归因](ideas/004-inflmem-agent-induced-drift-idea/) | not-started | 记忆写入的因果归因；区分 compliance 与 internalization | @member-01 | 待定（P2–P5） | idea | not-started | 若 memory writer 保留 provenance 并区分“推荐后接受”与“独立选择”，则相对 naive writer，可在推荐质量下降 ≤5% 的前提下降低 CMR 和 SFB，因为 naive 只看到行为 B 就把 agent 影响误归因为用户偏好 U | naive writer；后续 No memory/recency/summarize-all/Mem0/Letta/A-MEM | CMR；SFB；IDR；Quality（必须并列 Coverage） | MemoryCD Stage 1（20 用户）+ 受控 influence simulator；AcCoRD Stage 2 待接入 | 2026-11-12 | schema v1 已冻结（`D4-002`，默认全组使用）；待 P2–P5 按 v1 实现后跑 D5 demo 与 Gate 1；Week 2 Gate 1 检查 naive CMR ≥20%、provenance 相对下降 ≥30% |
 
 ## 变更记录
 
@@ -29,6 +30,7 @@
 | 2026-09-29 | 001 | 补登记 001（个人调研容器）进总表，此前遗漏 | @YuchenLiu |
 | 2026-09-29 | — | `.gitignore` 新增规则：`相关论文/`（版权 PDF）与 `sandbox/` 下个人草稿不入库，保留 `sandbox/` 目录结构说明文件 | @YuchenLiu |
 | 2026-10-31 | 003 | 新增目标漂移检测与可逆记忆更新 idea/实验；记录预注册未达标的停止或修订结论 | @dingyu668 |
+| 2026-11-12 | 004 | 新增 InflMem（Agent-Induced Drift）idea；完成 P1 Week 1 文档 kickoff/problem/causal_dag/metrics/schema_review/schema_v1_proposal/decisions/pilot_protocol/gate1_config/week1_review/week1_handoff/related_work；schema v1 冻结（D4-002）；五篇底座论文原文核对完成（AcCoRD/MemoryCD/ULSPB 已重下）；实验未开始 | @member-01 |
 
 ## 使用约定
 

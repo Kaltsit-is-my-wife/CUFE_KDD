@@ -1,0 +1,84 @@
+# InflMem Week 2 Gate 1 config (draft)
+# 说明：本文件是配置草案，不是已运行的实验记录。
+# 路径中的 runs/ 计划位于 experiments/004-inflmem/ 下；该实验目录尚未创建。
+
+version: 0
+project: inflmem
+gate: gate1
+owner: "@member-01"
+
+dataset:
+  name: memorycd
+  revision: "TODO_pin_hf_revision"       # 下载后填写 HF revision
+  checksum: "TODO_record_sha256"
+  domains: [electronics, books]
+  users: 20
+  sessions_per_user: 5
+  user_split: all_20_gate1               # Gate 1 用全部 20 用户；阈值预注册，不在此调参
+  data_root: "external://memorycd"       # 原始数据不入 Git
+  manifest: "data/processed/manifest.json"
+
+simulator:
+  hidden_attributes: [color, size, price_sensitivity, brand]
+  p_shock: 0.1
+  eta: 0.3
+  p_noise: 0.05
+  seed: 20261101
+
+writers:
+  types: [naive, provenance]
+  prompt_version: v1
+  model: "TODO_P4_frontier_model"        # Gate 1 前必须固定 model id
+  temperature: 0.0
+  max_tokens: 512
+
+memory_systems:
+  types: [mock, mem0, letta]
+  fallback: a-mem                        # 若 letta 不可用则替换，并记录到 decisions.md
+
+memory:
+  top_k: 5
+  max_records_per_user: 50
+  snapshot_each_session: true
+  user_scope_isolation: true
+
+seeds: [20261101, 20261102, 20261103, 20261104, 20261105]
+
+run_matrix:
+  type: cartesian
+  memory_systems: 3
+  writers: 2
+  seeds: 5
+  total_runs: 30
+
+metrics:
+  primary: [cmr]
+  secondary: [sfb, al, cr]
+  required: [cmr, sfb, coverage, idr, quality]
+  bootstrap_samples: 1000
+  ci: 0.95
+  aggregate_unit: user
+  multiple_comparison: holm_bonferroni
+
+gate1_thresholds:
+  naive_cmr_min: 0.20
+  provenance_relative_reduction_min: 0.30
+  quality_drop_max: 0.05
+  diagnostic_fallback_cmr: 0.10
+
+output:
+  root: "runs"
+  run_id_format: "YYYYMMDD_{writer}_{memory}_memorycd20_seed{seed}"
+  files:
+    - config.yaml
+    - events.jsonl
+    - memories.jsonl
+    - write_decisions.jsonl
+    - metrics.json
+    - stdout.log
+
+compliance:
+  commit_raw_data: false
+  commit_model_weights: false
+  commit_credentials: false
+  hidden_labels_in_prompt: false
