@@ -1,0 +1,46 @@
+{
+  "detection_comparison.png": {
+    "bytes": 49336,
+    "sha256": "efd8ed590d214eef974ad554b59f02eb8bf431bd4aa2117eb52a325ccaa033d6"
+  },
+  "detection_metrics.csv": {
+    "bytes": 366,
+    "sha256": "c8010941d6b1df57621f5bdf70dc947d6f65e98acb5c8d39039262ca6c182286"
+  },
+  "experiment_summary.md": {
+    "bytes": 5035,
+    "sha256": "d3db33da425b0b3629c5c3b85de9b3d6a487e21d824d9885e6a0ea1d3e4c1359"
+  },
+  "memory_comparison.png": {
+    "bytes": 40930,
+    "sha256": "cae3daf8df86aa72521291656c386c5125e9d994267b72c5f79b3c03d030e954"
+  },
+  "memory_metrics.csv": {
+    "bytes": 422,
+    "sha256": "7888f8139795d2ac6e014a62153c3c54fda10c0649a3ee33a768c2647e8fb261"
+  },
+  "memory_metrics_by_trajectory.csv": {
+    "bytes": 17069,
+    "sha256": "8f9ec7cf7b99d5ed7d538c1ff907022204c62e85e2059b9eebd6805c7a33a0d0"
+  },
+  "predictions.csv": {
+    "bytes": 8544,
+    "sha256": "4b8ad0ca12df6f872bce3dbc8ebe999a66bbb43a7561fd5ab113b80bbaf5544d"
+  },
+  "task_metrics.csv": {
+    "bytes": 285,
+    "sha256": "9407b6f0140acca6ec048773765f83b562f9e96a877d9f98ea6a60bad40408e9"
+  },
+  "task_metrics_by_trajectory.csv": {
+    "bytes": 28055,
+    "sha256": "9335ecdf4ed089a14c25313d45c5b9f25e9f27d81899853224cbadaedc639588"
+  },
+  "task_success_comparison.png": {
+    "bytes": 41991,
+    "sha256": "589aaac7815c2d932b973014397c26a732a1974b34c59ccb98d87c90681fd8e8"
+  },
+  "trajectory_data.csv": {
+    "bytes": 89896,
+    "sha256": "875e69fff9bda1087dd4494c9a4317e4a70ddaf7a6c35cd43b4731676d60dc20"
+  }
+}

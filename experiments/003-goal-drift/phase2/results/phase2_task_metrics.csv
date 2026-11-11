@@ -1,0 +1,17 @@
+﻿strategy,metric,estimate,ci_low,ci_high,bootstrap_unit,n_trajectories
+drift_aware_improved,task_success,0.8035714285714286,0.7633928571428571,0.8452380952380952,trajectory,112
+drift_aware_improved,old_goal_conflict,0.1889880952380952,0.14583333333333331,0.2306547619047619,trajectory,112
+drift_aware_improved,constraint_satisfaction_rate,0.8415178571428571,0.8072916666666667,0.8735119047619048,trajectory,112
+drift_aware_improved,background_retention_rate,1.0,1.0,1.0,trajectory,112
+drift_aware_original,task_success,0.8943452380952381,0.8556547619047619,0.931547619047619,trajectory,112
+drift_aware_original,old_goal_conflict,0.09821428571428571,0.06398809523809523,0.13541666666666666,trajectory,112
+drift_aware_original,constraint_satisfaction_rate,0.9322916666666667,0.9047619047619048,0.9568452380952381,trajectory,112
+drift_aware_original,background_retention_rate,1.0,1.0,1.0,trajectory,112
+no_update,task_success,0.5416666666666666,0.4613095238095238,0.625,trajectory,112
+no_update,old_goal_conflict,0.45833333333333337,0.3720238095238095,0.5416666666666666,trajectory,112
+no_update,constraint_satisfaction_rate,0.6354166666666667,0.5647321428571429,0.7083333333333333,trajectory,112
+no_update,background_retention_rate,1.0,1.0,1.0,trajectory,112
+time_decay,task_success,0.5372023809523809,0.46875,0.6086309523809524,trajectory,112
+time_decay,old_goal_conflict,0.28125,0.21875,0.34523809523809523,trajectory,112
+time_decay,constraint_satisfaction_rate,0.806547619047619,0.7581845238095238,0.8504464285714286,trajectory,112
+time_decay,background_retention_rate,0.744047619047619,0.6741071428571429,0.806547619047619,trajectory,112

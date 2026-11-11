@@ -18,6 +18,7 @@
 | 000 | [模板](ideas/000-template/) | [模板](experiments/000-template/) | 示例模板，不是实际项目 | @team | @member-01, @member-02 | archived | archived | 待填写 | 待填写 | 待填写 | 待填写 | 2026-09-14 | 复制模板创建新编号 |
 | 001 | [个人调研与想法总目录](ideas/001-my-research-idea/) | not-started | 个人调研累积容器（文献精读 + idea 候选） | @YuchenLiu | 待定 | idea | not-started | 调研容器，无单一核心假设；子课题成熟后须另开正式编号 | — | — | — | 2026-09-27 | 子课题成熟时另开编号并登记，已衍生出 002 |
 | 002 | [Agent 交互间的语义漂移探测](ideas/002-agent-interaction-drift-idea/) | not-started | 多 agent 交互间的语义漂移检测 | @YuchenLiu | 待定 | idea | not-started | 若将 agent 交互轮编码为可稳定标注的语义原子（role/goal-atom/tool-action/commitment/constraint），则相对 post-hoc 行为指标，逐轮累积原子级转移矩阵能在漂移发生的那一步给出可定位信号，因行为指标是滞后聚合、无法对齐轮次 | post-hoc 行为指标（role adherence、ASI 类复合分）；相邻轮强基线 | 标注一致性 Cohen's κ；漂移率 vs 置换零分布；单步定位 F1 | 待定（候选：CAMEL/AutoGen/MetaGPT 日志 + 自建可控轨迹） | 2026-09-29 | 完成 P1 探针（语义原子标注一致性 κ ≥ 0.6）作为 go/no-go |
+| 003 | [跨会话目标漂移检测与可逆记忆更新](ideas/003-goal-drift-idea/) | [实验](experiments/003-goal-drift/) | 在线目标漂移检测、漂移感知记忆更新与下游任务影响 | @dingyu668 | 待定 | completed | completed | 早期可逆记忆更新应相对确认后更新提高任务成功率至少 0.05，同时保护背景和稳定场景 | No Update；C/D 原始与改进记忆；Oracle Timing 诊断上界 | Early 相对 D 任务增益 0.020（95% CI [0.009, 0.032]）；过时记忆 F1 0.865 | 受控合成轨迹，Phase 3 种子 20270417，测试 224 条 | 2026-10-31 | 未达预注册增益门槛，停止或修订当前实现 |
 
 ## 变更记录
 
@@ -27,6 +28,7 @@
 | 2026-09-29 | 002 | 新增 idea「Agent 交互间的语义漂移探测」；贡献定位由"方法迁移"改为"语义本体 + 单步在线检测"；租服务器暂缓至探针定稿 | @YuchenLiu |
 | 2026-09-29 | 001 | 补登记 001（个人调研容器）进总表，此前遗漏 | @YuchenLiu |
 | 2026-09-29 | — | `.gitignore` 新增规则：`相关论文/`（版权 PDF）与 `sandbox/` 下个人草稿不入库，保留 `sandbox/` 目录结构说明文件 | @YuchenLiu |
+| 2026-10-31 | 003 | 新增目标漂移检测与可逆记忆更新 idea/实验；记录预注册未达标的停止或修订结论 | @dingyu668 |
 
 ## 使用约定
 

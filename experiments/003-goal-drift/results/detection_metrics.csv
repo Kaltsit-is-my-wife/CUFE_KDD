@@ -1,0 +1,4 @@
+﻿method,precision,recall,f1,false_positive_rate,mean_detection_delay,mean_localization_error,drift_type_accuracy,topic_switch_false_positives,tp,fp,fn,tn
+baseline_a_topic,0.0,0.0,0.0,0.5,,,0.0,12,0,12,24,12
+baseline_b_persistence,1.0,1.0,1.0,0.0,1.3333333333333333,2.8333333333333335,0.0,0,24,0,0,24
+method_c_sustained,1.0,1.0,1.0,0.0,-0.5,1.0,1.0,0,24,0,0,24
